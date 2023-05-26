@@ -65,9 +65,9 @@ def main():
 			print("Error message: ", str(e))
 
 	elif user_input == "2":
-		first = input("User's first name (e.g. Shaun): ")
+		first = input("User's first name (e.g. Britney): ")
 		formatting()
-		last = input("User's last name (e.g. Cantwell): ")
+		last = input("User's last name (e.g. Spears): ")
 		formatting()
 		try:
 			view_entriesUser(first, last)
