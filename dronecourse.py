@@ -6,6 +6,9 @@ import os
 
 def formatting():
 	print(" ")
+	
+def cont():
+	print("\nPress enter to continue.")
 
 # Get the directory of the Python script
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -75,13 +78,29 @@ def view_entriesUser(fname, lname):
 		formatting()
 		print("total time racing (in minutes): " + str(round(total_time/60, 2)))
 
+# function that straight up edits entries in the csv file.
+def add_entryUser():
+	formatting()
+	newEntry = ""
+	print("Make sure to capitlise first letter of all names!")
+	fname = str(input("first name: "))
+	lname = str(input("last name: "))
+	time_in_seconds = int(input("time in seconds: "))
+	race_course = str(input("course name: "))
+	newEntry += str(fname + "," + lname + "," + str(time_in_seconds) + "," + race_course)
+	formatting()
+	print(f"{fname}'s time was uploaded to the leaderboard successfully!")
+
+	with open('tinywhoop1.csv','a',) as csv_file:
+		csv_file.write(newEntry)
+		csv_file.write("\n")
 
 # main function that's looped
 
 def main():
 	formatting()
 	print("- Welcome to the leaderboards -")
-	print("- Enter '1' to view all existing leaderboard times or enter '2' to view all existing times for a particular user")
+	print("- Enter '1' to view all existing leaderboard times, enter '2' to view all existing times for a particular user or enter '3' to add a time to the leaderboard.")
 	formatting()
 	user_input = input()
 	
@@ -89,7 +108,7 @@ def main():
 		try:
 			viewLeaderboard()
 		except Exception as e:
-			print("Error message: ", str(e))
+			print("Error message: ", e)
 
 	elif user_input == "2":
 		formatting()
@@ -102,9 +121,17 @@ def main():
 		except:
 			print("Sorry, I can't find any entries under that name in the our database. Make sure the first letter of both the first and last name are capitalised with no extra spaces at the end.")
 		
+	elif user_input == "3":
+		formatting()
+		try:
+			add_entryUser()
+		except Exception as e:
+			print("This isn't working right now, try again. Error message: ", e)
+			
 	else:
-		print("You didn't enter a valid number, try again...")
+		print("You didn't enter a valid number, try again.")
 
 while True:
 	main()
+	cont()
 	input()
